@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
 from player import Player, BaseballPlayer
+from position import Position
 import pandas as pd
 import logging
 
@@ -16,7 +17,7 @@ class DataLoader(ABC):
         pass
 
     @abstractmethod
-    def get_positions(self) -> List[str]:
+    def get_positions(self) -> List[Position]:
         pass
 
 
@@ -50,8 +51,19 @@ class BaseballDataLoader(DataLoader):
             name = row[0]
             logging.debug(f"The value of name is: {name}")
             self.players.append(BaseballPlayer(name))
+    
         return self.players
 
-    def get_positions(self) -> List[str]:
-        self.player_data_row = self.player_data.values.tolist()
-        logging.debug(f"The value of self.name_list is: {self.player_data_row}")
+    def get_positions(self) -> List[Position]:
+        self.position_data_row = self.position_data.values.tolist()
+        logging.debug(f"The value of self.name_list is: {self.position_data_row}")
+        for row in self.position_data_row:
+            logging.debug(f"The value of row is: {row}")
+            name = str(row[0]).strip().upper()
+            type = str(row[1]).strip().upper()
+            position = Position(position_name=name, position_type=type)
+            logging.debug(f"The value of name is: {position.position_name} and the position type is {position.position_type}")
+            self.positions.append(position)
+        for next_pos in self.positions:
+            logging.debug(f"The stored name of position is: {next_pos.position_name} and the position type is {next_pos.position_type}")
+        return self.positions
