@@ -39,6 +39,7 @@ class BaseballPlayer(Player):
 
     def assign_position(self,inning:int, position: Position) -> None:
         self.player_positions[inning]=Position(position.position_name, position.position_type)
+        position.assigned[inning]=True
         if self.player_positions[inning].position_type == "INFIELD":
             self.infield_count+=1
             BaseballPlayer.team_infield_count[self.full_name]=self.infield_count
