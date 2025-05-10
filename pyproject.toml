@@ -8,7 +8,7 @@ authors = ["Paul Bancer"]
 python = "^3.10"
 pandas = "^1.4.3"
 openpyxl = "^3.0.10"
-Pillow = "^9.2.0"
+Pillow = "^10.3.0"
 
 [tool.poetry.dev-dependencies]
 
